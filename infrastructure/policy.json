@@ -43,7 +43,7 @@
     "parameters_values": {
         "allowedLocations": {
             "value": [
-                "{RGLocation}"
+                "centralus"
             ]
         },
         "allowedServices": {
