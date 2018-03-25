@@ -1,0 +1,32 @@
+{
+    "$schema": "http://schema.management.azure.com/schemas/2014-04-01-preview/deploymentTemplate.json#",
+    "contentVersion": "0.9.0.0",
+    "parameters": {
+        "name": {
+            "type": "string"
+        },
+        "location": {
+            "type": "string",
+            "defaultValue": "centralus"
+        },
+        "newTier": {
+            "type": "string",
+            "defaultValue": "Consumption"
+        }
+    },
+    "resources": [
+        {
+            "apiVersion": "2016-11-01",
+            "name": "[parameters('name')]",
+            "location": "[parameters('location')]",
+            "type": "Microsoft.DataLakeStore/accounts",
+            "properties": {
+                "newTier": "[parameters('newTier')]",
+                "encryptionState": "Enabled",
+                "encryptionConfig": {
+                    "type": "ServiceManaged"
+                }
+            }
+        }
+    ]
+}
