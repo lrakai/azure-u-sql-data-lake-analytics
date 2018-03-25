@@ -2,9 +2,13 @@
     "$schema": "http://schema.management.azure.com/schemas/2014-04-01-preview/deploymentTemplate.json#",
     "contentVersion": "0.9.0.0",
     "parameters": {
-        "name": {
+        "storeName": {
             "type": "string",
-            "defaultValue": "[concat('cadatalake', uniqueString(resourceGroup().id))]"
+            "defaultValue": "[concat('cadlstore', uniqueString(resourceGroup().id))]"
+        },
+        "analyticsName": {
+            "type": "string",
+            "defaultValue": "[concat('cadla', uniqueString(resourceGroup().id))]"
         },
         "location": {
             "type": "string",
@@ -18,7 +22,7 @@
     "resources": [
         {
             "apiVersion": "2016-11-01",
-            "name": "[parameters('name')]",
+            "name": "[parameters('storeName')]",
             "location": "[parameters('location')]",
             "type": "Microsoft.DataLakeStore/accounts",
             "properties": {
@@ -27,6 +31,24 @@
                 "encryptionConfig": {
                     "type": "ServiceManaged"
                 }
+            }
+        },
+        {
+            "apiVersion": "2016-11-01",
+            "name": "[parameters('analyticsName')]",
+            "location": "[parameters('location')]",
+            "dependsOn": [
+                "Microsoft.DataLakeStore/accounts/cadlanalytixadls"
+            ],
+            "type": "Microsoft.DataLakeAnalytics/accounts",
+            "properties": {
+                "defaultDataLakeStoreAccount": "[parameters('storeName')]",
+                "dataLakeStoreAccounts": [
+                    {
+                        "name": "[parameters('storeName')]"
+                    }
+                ],
+                "newTier": "[parameters('newTier')]"
             }
         }
     ]
