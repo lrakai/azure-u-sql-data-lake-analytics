@@ -3,7 +3,8 @@
     "contentVersion": "0.9.0.0",
     "parameters": {
         "name": {
-            "type": "string"
+            "type": "string",
+            "defaultValue": "[concat('ca-data-lake-', uniqueString(resourceGroup().id))]"
         },
         "location": {
             "type": "string",
