@@ -4,7 +4,7 @@
     "parameters": {
         "name": {
             "type": "string",
-            "defaultValue": "[concat('ca-data-lake-', uniqueString(resourceGroup().id))]"
+            "defaultValue": "[concat('cadatalake-', uniqueString(resourceGroup().id))]"
         },
         "location": {
             "type": "string",
