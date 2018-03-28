@@ -38,7 +38,7 @@
             "name": "[parameters('analyticsName')]",
             "location": "[parameters('location')]",
             "dependsOn": [
-                "Microsoft.DataLakeStore/accounts/cadlanalytixadls"
+                "[parameters('storeName')]"
             ],
             "type": "Microsoft.DataLakeAnalytics/accounts",
             "properties": {
