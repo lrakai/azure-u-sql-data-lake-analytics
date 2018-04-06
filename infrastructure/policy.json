@@ -15,6 +15,13 @@
                 "strongType": "type",
                 "displayName": "Allowed resources"
             }
+        },
+        "disallowedActions": {
+            "type": "array",
+            "metadata": {
+                "description": "The list of acctions that are not allowed in the resource group",
+                "displayName": "Disallowed actions"
+            }
         }
     },
     "displayName": "Allowed locations, services",
@@ -33,6 +40,10 @@
                         "field": "location",
                         "in": "[parameters('allowedLocations')]"
                     }
+                },
+                {
+                    "source": "action",
+                    "in": "[parameters('disallowedActions')]"
                 }
             ]
         },
@@ -48,8 +59,21 @@
         },
         "allowedServices": {
             "value": [
+                "Microsoft.Web/serverfarms",
+                "Microsoft.Web/sites",
+                "Microsoft.Web/sites/sourcecontrols",
+                "Microsoft.Storage/storageAccounts",
+                "Microsoft.KeyVault/vaults",
+                "Microsoft.KeyVault/vaults/secrets",
                 "Microsoft.DataLakeStore/accounts",
                 "Microsoft.DataLakeAnalytics/accounts"
+            ]
+        },
+        "disallowedActions": {
+            "value": [
+                "Microsoft.Resources/checkResourceName/action",
+                "Microsoft.DataLakeStore/locations/checkNameAvailability/action",
+                "Microsoft.DataLakeAnalytics/locations/checkNameAvailability/action"
             ]
         }
     }
