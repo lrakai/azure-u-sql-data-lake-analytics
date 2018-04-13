@@ -1,0 +1,19 @@
+@searchlog =
+    EXTRACT UserId   int,
+        TimeStamp    DateTime,
+        Language     string,
+        Query        string,
+        Duration     int,
+        Urls         string,
+        ClickedUrls  string
+    FROM "/searchLog.tsv"
+    USING Extractors.Tsv();
+
+@out =
+    SELECT TimeStamp, Query, Duration
+    FROM @searchlog
+    WHERE Duration > 800;
+
+OUTPUT @out
+    TO "/output.tsv"
+    USING Outputters.Tsv();
